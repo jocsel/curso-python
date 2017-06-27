@@ -1,0 +1,5 @@
+f = open('sudiccionario.txt', 'a')
+datos=raw_input('Ingresando nuevos datos')
+f.write(datos)
+f.write('\n')
+f.close()
