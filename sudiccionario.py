@@ -43,22 +43,40 @@ print
 for clave,valor in dic.iteritems():
     orden='El estudiante {0} de {1} anio es de la ciudad de {2} y cursa {3} anio en la universidad'
     print (orden.format(clave,valor['edad'],valor['ciudad'],valor['anio']))
+    f = open('orden.txt', 'a')
+    f.write(orden.format(clave, valor['edad'], valor['ciudad'], valor['anio']))
+    f.write('\n')
+    f.close()
 print
 print('Los estudiantes de Managua son: ')
 for clave,valor in dic.iteritems():
      managuas='El estudiante {0} de edad {1}, es de la ciudad de {2} y cursa el anio {3} en la universidad'
      if valor['ciudad']=='Managua':
        print(managuas.format(clave,valor['edad'],valor['ciudad'],valor['anio']))
+       f = open('managuas.txt', 'a')
+       f.write(managuas.format(clave, valor['edad'], valor['ciudad'], valor['anio']))
+       f.write('\n')
+       f.close()
      
 print
 print('Los estudiantes de Masaya son:')
 for clave, valor in dic.iteritems():
-      masayenos='El estudiante {0} de edad {1} es de la cuidad de {2} y cursa el anio {3} en la universidad'
+      masayenos='El estudiante {0} de edad {1} es de la cuidad de {2} y cursa el anio {3} en la ' \
+                'universidad'
       if valor['ciudad']=='Masaya':
         print(masayenos.format(clave,valor['edad'],valor['ciudad'],valor['anio']))
+        f = open('masayenos.txt', 'a')
+        f.write(masayenos.format(clave, valor['edad'], valor['ciudad'], valor['anio']))
+        f.write('\n')
+        f.close()
 print
 print('Los estudiantes menores de 21 anios son: ')
 for clave,valor in dic.iteritems():
   menores='El estudiante {0} de edad {1} es de la cuidad de {2} y cursa el anio {3} en la universidad'
   if valor['edad']<21:
     print(menores.format(clave,valor['edad'],valor['ciudad'],valor['anio']))
+    f = open('menores.txt', 'a')
+    f.write(menores.format(clave, valor['edad'], valor['ciudad'], valor['anio']))
+    f.write('\n')
+    f.close()
+
