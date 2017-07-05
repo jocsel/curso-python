@@ -19,7 +19,7 @@
 	width: 600px;
 	height: 600px;
 	text-align: center;
-	
+
 }
 .a:hover
 {
@@ -55,7 +55,7 @@
 {
 	width: 600px;
 	height: 600px;
-	text-align: center;	
+	text-align: center;
 
 }
 .btn:hover
@@ -66,15 +66,16 @@
 </style>
 </head>
 <body>
+	<!--<h1>{{encabezado}}</h1>-->
+
 <center><p>Listas</p></center>
 <center><div class="lista">
 	<ul class="list-group">
-  	<li class="list-group-item"><p class="a">Python</p></li>
-  	<li class="list-group-item"><p class="b">Sietemas operativos</p></li>
-  	<li class="list-group-item"><p class="c">Estudio de trabajo</p></li>
-  	<li class="list-group-item"><p class="d">Arquitectura de pc</p></li>
-  	<li class="list-group-item"><p class="e">Analisis y diseño de sistemas</p></li>
-</ul>
+
+		{% block contenido %}
+		{% endblock %}
+
+
 </div></center>
 <br>
 <center><p>Formularios</p></center>
@@ -99,9 +100,9 @@
 		<div class="form-group">
 			<label for="option">Fecha</label>
 			<input class="form-control" id="nombre" type="text" placeholder="Fecha:">
-			
+
 		</div>
-	
+
 		<div class="form-group">
 			<label for="mensaje">Mensaje:</label>
 			<textarea class="form-control" id="mensaje" placeholder="Escribe tu mensaje">
