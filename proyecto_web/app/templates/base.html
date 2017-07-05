@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>listas y formularios</title>
+	<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<style type="text/css">
+.lista
+{
+	width: 600px;
+	height: 600px;
+	text-align: center;
+	
+}
+.a:hover
+{
+	font-family: cursive;
+	font-size: 20px;
+	background-color:#777777;
+}
+.b:hover
+{
+	font-family: cursive;
+	font-size: 20px;
+	background-color:#D06262;
+}
+.c:hover
+{
+	font-family: cursive;
+	font-size: 20px;
+	background-color:#BF1818;
+}
+.d:hover
+{
+	font-family: cursive;
+	font-size: 20px;
+	background-color:#517DEC;
+}
+.e:hover
+{
+	font-family: cursive;
+	font-size: 20px;
+	background-color:#2AF779;
+}
+.contenedor
+{
+	width: 600px;
+	height: 600px;
+	text-align: center;	
+
+}
+.btn:hover
+{
+	width: 100px;
+	height:50px;
+}
+</style>
+</head>
+<body>
+<center><p>Listas</p></center>
+<center><div class="lista">
+	<ul class="list-group">
+  	<li class="list-group-item"><p class="a">Python</p></li>
+  	<li class="list-group-item"><p class="b">Sietemas operativos</p></li>
+  	<li class="list-group-item"><p class="c">Estudio de trabajo</p></li>
+  	<li class="list-group-item"><p class="d">Arquitectura de pc</p></li>
+  	<li class="list-group-item"><p class="e">Analisis y diseño de sistemas</p></li>
+</ul>
+</div></center>
+<br>
+<center><p>Formularios</p></center>
+<center><div class="contenedor">
+	<form action="" class="">
+		<div class="form-group">
+			<label for="nombre">Nombre</label>
+			<input class="form-control" id="nombre" type="text" placeholder="Nombre:">
+		</div>
+		<div class="form-group">
+			<label for="option">Edad</label>
+			<!--<select class="form-control" name="" id="option">
+				<option value="">Opcion #1</option>
+				<option value="">Opcion #2</option>
+				<option value="">Opcion #3</option>
+				<option value="">Opcion #4</option>
+				<option value="">Opcion #5</option>-->
+				<input class="form-control" id="nombre" type="text" placeholder="Edad:">
+
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="option">Fecha</label>
+			<input class="form-control" id="nombre" type="text" placeholder="Fecha:">
+			
+		</div>
+	
+		<div class="form-group">
+			<label for="mensaje">Mensaje:</label>
+			<textarea class="form-control" id="mensaje" placeholder="Escribe tu mensaje">
+			</textarea>
+		</div>
+		<!--<div class="form-group">
+			<label for="archivo">Archivo:</label>
+			<label type="file" id="erchivo">
+		</label>-->
+		<button class="btn btn-primary" id="btn">Enviar</button>
+	</form>
+</div></center>
+
+</body>
+</html>
