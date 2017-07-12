@@ -13,14 +13,9 @@ class MiVentana(Gtk.Window):
 		self.agregar_txt()
 		self.agregar_label()
 		self.btnsalir()
+  		self.contenedor()
 
-		self.box = Gtk.VBox()
-		self.box.pack_start(self.texto,True,True,0)
-		self.box.pack_start(self.btn1,True,True,0)
-		self.box.pack_start(self.label1,True,True,0)
-		self.box.pack_start(self.btnsalir,True,True,0)
 
-		self.add(self.box)
 
 	def imprimir(self,btn):
 		imprimir = self.texto.get_text()
@@ -39,6 +34,14 @@ class MiVentana(Gtk.Window):
 	def btnsalir(self):
 		self.btnsalir = Gtk.Button('Salir')
 		self.btnsalir.connect('clicked',Gtk.main_quit)
+  	def contenedor(self):
+		self.box = Gtk.VBox()
+		self.box.pack_start(self.texto,True,True,0)
+		self.box.pack_start(self.btn1,True,True,0)
+		self.box.pack_start(self.label1,True,True,0)
+		self.box.pack_start(self.btnsalir,True,True,0)
+
+		self.add(self.box)
 
 if __name__ == '__main__':
 	 ventana=MiVentana()
