@@ -12,24 +12,33 @@ class MiVentana(Gtk.Window):
 		self.agregar_entrada()
 		self.agregar_boton()
 		self.agregar_lista()
+		self.agregar_label()
+		self.salir()
 
 	def agregar_contenedor(self):
-		self.contenedor = Gtk.Grid()
+		self.contenedor = Gtk.Grid() #interfaz
 		self.contenedor.set_column_homogeneous(True)
 		self.add(self.contenedor)
 
 	def agregar_entrada(self):
-		self.entrada = Gtk.Entry()
+		self.entrada = Gtk.Entry() #textbox
 		self.entrada_monto = Gtk.Entry() #NUEVO TEXT
 		self.contenedor.attach(self.entrada,0,0,2,1)
-		self.contenedor.attach_next_to(self.entrada_monto,self.entrada,Gtk.PositionType.RIGHT,1,1) # EL 1 INDICA POSICION EN LA VENTANA
+		self.contenedor.attach_next_to(self.entrada_monto,self.entrada,Gtk.PositionType.RIGHT,1,1) # EL 1 INDICA POSICION EN LA INTERFAZ Y Q ESTARAN A LA PAR en ese orden
+		
 
 	def agregar_boton(self):
 		self.boton = Gtk.Button('Agregar')
-		self.contenedor.attach_next_to(self.boton,self.entrada,Gtk.PositionType.BOTTOM,3,1)
+		self.contenedor.attach_next_to(self.boton,self.entrada,Gtk.PositionType.BOTTOM,3,1)#2=ancho del boton, 1=largo del boton
 
 	def agregar_label(self):
 		self.label= Gtk.Label('BIENVENIDO')
+
+		self.contenedor.attach(self.label,0,3,3,1)#1=columna,#2=fila,3=margen derecho,#4=nro de filas a usar
+	def salir(self):
+		self.salir=Gtk.Button('Salir')
+		self.contenedor.attach(self.salir,0,7,3,2)
+		self.salir.connect('clicked',Gtk.main_quit)
 
 
 	def agregar_lista(self):
@@ -45,25 +54,36 @@ class MiVentana(Gtk.Window):
       	CellRenderer widgets como elementos hijos
       	args:(Titulo, cellRenderer, posicion del modelo de la info a mostrar)
       	3.3-agregar cada TreeViewColumn al TreeView widget'''
-		self.modelo = Gtk.ListStore(str,float)
 		
-		self.lista_activos = Gtk.TreeView(self.modelo)
-		descripcion = Gtk.CellRendererText() #para agregar columnas
-		columna_descripcion = Gtk.TreeViewColumn('Descripcion', descripcion,text=0) #para egregar columnas
+		self.modelo = Gtk.ListStore(str,float)   #AGREGA EN LISTSTORE
+		self.lista_activos = Gtk.TreeView(self.modelo) #AGREGA LOS VALORES DENTRO DEL LISTSTORE
+		descripcion = Gtk.CellRendererText() #para agregar columna de descripcion
+		columna_descripcion = Gtk.TreeViewColumn('Descripcion', descripcion,text=0) #para egregar columna dentro del treeview en la posicion 0
 		monto = Gtk.CellRendererText()
 		columna_monto = Gtk.TreeViewColumn('Monto',monto,text=1)
-		self.lista_activos.append_column(columna_descripcion)
+		self.lista_activos.append_column(columna_descripcion) #activa la columna
 		self.lista_activos.append_column(columna_monto)
-		self.contenedor.attach_next_to(self.lista_activos,self.boton,Gtk.PositionType.BOTTOM,3,1)  #POSICION EL NUM 3 EN LA VENTANA
-		self.boton.connect('clicked',self.agregar_fila)
+		self.contenedor.attach_next_to(self.lista_activos,self.boton,Gtk.PositionType.BOTTOM,3,1)  #1=ancho de la lista,self.boton indica q esta lista va bajo este boton
+		self.boton.connect('clicked',self.agregar_fila)  #AGREGA LOS VALORES A LA FILA
 
 
 
    	def agregar_fila(self,btn):
    		texto = self.entrada.get_text() #get agarra
    		monto=self.entrada_monto.get_text() # NUEVA ENTRADA DE VALOR
+
    		
-   		try:
+   		if texto.isalpha() and monto.isdigit() :    #isalpha=solo letreas, isdigit=solo num isalnum=alphanum
+   			self.modelo.append([texto,float(monto)])
+   			self.label.set_text('VALORES AGREGADOS CORRECTAMENTE')
+
+   		else : 
+   			
+   			self.label.set_text('POR FAVOR INGRESAR LOS VALORES CORRECTAMENTE...!')
+
+
+   		
+   		'''try:
 
    			self.modelo.append([texto,float(monto)]) #para egragar los valores en al treeview
    		
@@ -74,19 +94,11 @@ class MiVentana(Gtk.Window):
    				print 'es un value error'
 
 
-   			print 'Este es el error', e
+   			print 'Este es el error', e'''
 
    		
-   		self.entrada.set_text('') #set introduce
+   		self.entrada.set_text('') #set introduce  //PARA LIMPIAR VALORES
    		self.entrada_monto.set_text('')
-
-   		if self.entrada.get_text() =='':
-
-   				self.label=Gtk.Label('')
-
-
-
-
 
 if __name__ == '__main__':
 	ventana = MiVentana()
