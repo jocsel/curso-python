@@ -13,7 +13,6 @@ class Capital(Gtk.Window):
 		self.boton_activos()
 		self.lbl_activo()
 		self.lista_activos()
-		self.agregar_valores()
 
 	def agregar_interfaz(self):
 		self.interfaz =Gtk.Grid()
@@ -35,24 +34,23 @@ class Capital(Gtk.Window):
 		self.interfaz.attach_next_to(self.label,self.activos,Gtk.PositionType.BOTTOM,3,1)
 
 	def lista_activos(self):
-		self.lista = Gtk.ListStore(str,float)
+		self.lista = Gtk.ListStore(str, float)
 		self.almacen = Gtk.TreeView(self.lista)
 		descrip = Gtk.CellRendererText()
 		columna_descrip = Gtk.TreeViewColumn('Descripcion', descrip, text=0)
 		cant = Gtk.CellRendererText()
-		columna_cant = Gtk.TreeViewColumn('Cantidad', cant , text=2)
+		columna_cant = Gtk.TreeViewColumn('Cantidad', cant , text=1)
 		self.almacen.append_column(columna_descrip)
 		self.almacen.append_column(columna_cant)
 		self.interfaz.attach_next_to(self.almacen,self.label, Gtk.PositionType.BOTTOM,3,1)
 		self.activos.connect('clicked', self.agregar_valores)
 
 
-	def agregar_valores(self):
+	def agregar_valores(self, btn):
 		A = self.descripcion.get_text()
 		B = self.cantidad.get_text()
-		self.lista.append([A,float(B)])
-		
-		
+		self.lista.append([A, float(B)])
+
 if __name__ == '__main__':
 	mostrar = Capital()
 	mostrar.show_all()
