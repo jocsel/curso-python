@@ -2,18 +2,19 @@ import gi
 gi.require_version('Gtk','3.0')
 from gi.repository import Gtk
 
-class MiVentana(Gtk.Window):
+class MiVentana(Gtk.ApplicationWindow):
 	"""docstring for MiVentana"""
 	def __init__(self, *args,**kwargs):
 		super(MiVentana, self).__init__(*args,**kwargs)
 		self.set_default_size(500,600)
-		self.connect('delete-event',Gtk.main_quit)
+		#self.connect('delete-event',Gtk.main_quit)
 		self.agregar_contenedor()
 		self.lblactivos()
 		self.agregar_entrada()
 		self.agregar_boton()
 		self.agregar_label()
 		self.agregar_lista()
+
 		#####################
 
 		self.lblvacio()
@@ -23,9 +24,16 @@ class MiVentana(Gtk.Window):
 		self.agregar_label2()
 		self.agregar_lista2()
 		self.salir()
+		####################
+		self.lbl_calculo_activos()
+		self.lbl_suma_activos()
+		self.lbl_calculo_pasivo()
+		self.lbl_suma_pasivos()
+		self.capital()
+		#self.diferencia()
 
 	def lblactivos(self):
-		self.lblact = Gtk.Label('Lista de activos')
+		self.lblact = Gtk.Label('**********************Lista de activos**********************')
 		self.contenedor.attach(self.lblact,0,0,3,1)
 
 	def agregar_contenedor(self):
@@ -47,9 +55,9 @@ class MiVentana(Gtk.Window):
 		self.contenedor.attach_next_to(self.label,self.boton,Gtk.PositionType.BOTTOM,3,1)
 
 	def salir(self):
-		self.salir=Gtk.Button('Salir')
-		self.contenedor.attach(self.salir,0,120,3,1)
-		self.salir.connect('clicked',Gtk.main_quit)
+		self.salir=Gtk.Button('************************************')
+		self.contenedor.attach(self.salir,0,130,3,1)
+		#self.salir.connect('clicked',Gtk.main_quit)
 
 	def agregar_lista(self):
 
@@ -67,11 +75,18 @@ class MiVentana(Gtk.Window):
 	def agregar_fila(self,btn):
    		texto = self.entrada.get_text() 
    		monto=self.entrada_monto.get_text()
-
+   		self.cont =0
    		
-   		if texto.isalpha() and monto.isdigit() :   
+   		if texto.isalpha() and monto.isdigit() :  
+   			 
    			self.modelo.append([texto,float(monto)])
+   			for a in self.modelo:
+   				res = float(a[1])
+   				self.cont += res
+   				self.suma.set_text(str(self.cont))
+
    			self.label.set_text('Bien hecho...')
+   			self.diferencia()
 
    		else : 
    			
@@ -86,7 +101,7 @@ class MiVentana(Gtk.Window):
    		self.contenedor.attach(self.vacio,0,10,3,10)
 
    	def lblpasivos(self):
-   		self.lblpas = Gtk.Label('Lista de pasivos')
+   		self.lblpas = Gtk.Label('**********************Lista de pasivos**********************')
    		self.contenedor.attach(self.lblpas,0,20,3,10)
 
 
@@ -94,7 +109,6 @@ class MiVentana(Gtk.Window):
 		self.entrada2 = Gtk.Entry()
 		self.entrada_monto2 = Gtk.Entry() 
 		self.contenedor.attach_next_to(self.entrada2,self.lblpas,Gtk.PositionType.BOTTOM,2,1)
-		self.contenedor.attach(self.entrada2,0,0,2,1)
 		self.contenedor.attach_next_to(self.entrada_monto2,self.entrada2,Gtk.PositionType.RIGHT,1,1)
 
 	def agregar_boton2(self):
@@ -121,11 +135,21 @@ class MiVentana(Gtk.Window):
 	def agregar_fila2(self,btn2):
    		texto2 = self.entrada2.get_text() 
    		monto2=self.entrada_monto2.get_text()
-
    		
-   		if texto2.isalpha() and monto2.isdigit() :   
+   		self.contador=0
+   		if texto2.isalpha() and monto2.isdigit() :  
+   			 
    			self.modelo2.append([texto2,float(monto2)])
+
+   			for i  in self.modelo2:
+
+   				add = float(i[1])
+   				self.contador+= add
+   				#print contador
+   				self.resta.set_text(str(self.contador))
+   		
    			self.label2.set_text('Bien hecho...')
+   			self.diferencia()
 
    		else : 
    			
@@ -134,7 +158,35 @@ class MiVentana(Gtk.Window):
    		self.entrada2.set_text('') 
    		self.entrada_monto2.set_text('')
 
+   	def lbl_calculo_activos(self):
+   		self.act = Gtk.Label('Total activos')
+   		self.contenedor.attach_next_to(self.act,self.lista_activos2,Gtk.PositionType.BOTTOM,1,1)
+
+   	def lbl_suma_activos(self):
+   		self.suma = Gtk.Label('0')
+   		self.contenedor.attach_next_to(self.suma,self.act,Gtk.PositionType.RIGHT,1,1)
+
+   	def lbl_calculo_pasivo(self):
+   		self.pasiv = Gtk.Label('Total pasivos')
+   		self.contenedor.attach_next_to(self.pasiv,self.act,Gtk.PositionType.BOTTOM,1,1)
+
+   	def lbl_suma_pasivos(self):
+   		self.resta = Gtk.Label('0')
+   		self.contenedor.attach_next_to(self.resta,self.pasiv,Gtk.PositionType.RIGHT,1,1)
+
+   	def capital(self):
+   		self.capitall = Gtk.Label('Capital')
+   		self.contenedor.attach(self.capitall,0,55,1,1)
+   		self.dif = Gtk.Label('0')
+   		self.contenedor.attach_next_to(self.dif,self.capitall,Gtk.PositionType.RIGHT,1,1)
+
+   	def diferencia (self):
+   		z=0
+   		z= float(self.cont) - float(self.contador)
+   		self.dif.set_text(str(z))
+   		
+   
 if __name__ == '__main__':
 	ventana = MiVentana()
 	ventana.show_all()
-	Gtk.main()
+	Gtk.main(),
